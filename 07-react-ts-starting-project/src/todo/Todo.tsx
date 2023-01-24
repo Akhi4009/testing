@@ -1,13 +1,15 @@
-import React from 'react'
-import { Item } from '../constant'
+import React,{useContext} from 'react'
 import TodoItem from './TodoItem'
 import styles from "./Todo.module.css"
-const Todo:React.FC<{item:Item[];onRemoveTodo:(id:number)=>void}> = (props) => {
+import { CartContext } from '../Context/CartContext'
+const Todo:React.FC = () => {
+
+  const todosctx=useContext(CartContext)
   return (
     <ul className={styles.todos}>
     
-{props.item.map(item=>(
-    <TodoItem key={item.id} text={item.text}  onRemoveTodo={props.onRemoveTodo.bind(null,item.id)}/>
+{todosctx.items.map(item=>(
+    <TodoItem key={item.id} text={item.text}  onRemoveTodo={todosctx.removeTodo.bind(null,item.id)}/>
 ))}
     </ul>
   )

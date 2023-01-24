@@ -1,9 +1,11 @@
-import React, { useRef } from 'react'
+import React, { useRef,useContext } from 'react'
+import { CartContext } from '../Context/CartContext'
 import styles from "./NewTodo.module.css"
 
-const NewTodo:React.FC<{onAddTodo:(text:string)=>void}> = (props) => {
+const NewTodo:React.FC = () => {
 
     const todoTextInputRef=useRef<HTMLInputElement>(null)
+    const todosctx=useContext(CartContext)
     
     const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
 e.preventDefault()
@@ -11,7 +13,8 @@ const enteredText=todoTextInputRef.current!.value
 if(enteredText.trim().length===0){
     return
 }
-props.onAddTodo(enteredText)
+todosctx.addTodo(enteredText)
+
     }
   return (
     <>
