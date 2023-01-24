@@ -1,14 +1,25 @@
+import { useState } from 'react';
 import { Item } from './constant';
+import NewTodo from './todo/NewTodo';
 import Todo from './todo/Todo';
 
-const item:Item[]=[
-  {text:"Learn React",id:1}, {text:"Learn React",id:1}
-]
+
+
 
 function App() {
+ const [todos,setTodos]=useState<Item[]>([])
+  const todoHandler=(text:string)=>{
+    let newItem={
+      text,
+      id:Date.now()
+    }
+
+    setTodos([...todos,newItem])
+}
   return (
     <div >
-      <Todo item={item}/>
+<NewTodo onAddTodo={todoHandler}/>
+      <Todo item={todos}/>
        
     </div>
   );
